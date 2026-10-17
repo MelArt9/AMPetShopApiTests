@@ -10,21 +10,20 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Locale;
 import java.util.Set;
 
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Feature("Pet")
+@Tag("smoke")
+@Owner("artem melnikov")
 public class TestPet {
 
     public static final String BASE_URL = "http://5.181.109.28:9090/api/v3";
 
     @Test
-    @Feature("Pet")
-    @Tag("smoke")
-    @Owner("artem melnikov")
     public void testDeleteNonexistentPet() {
         Response response = step("Отправить DELETE-запрос на удаление несуществующего Pet", () ->
                 given()
@@ -48,9 +47,6 @@ public class TestPet {
     }
 
     @Test
-    @Feature("Pet")
-    @Tag("smoke")
-    @Owner("artem melnikov")
     public void testUpdateNonexistentPet() {
         Pet pet = new Pet();
         pet.setId(9999);
@@ -77,9 +73,6 @@ public class TestPet {
     }
 
     @Test
-    @Feature("Pet")
-    @Tag("smoke")
-    @Owner("artem melnikov")
     public void testGetNonexistentPet() {
         Response response = step("Отправить GET-запрос на получение несуществующего Pet", () ->
                 given()
@@ -109,8 +102,6 @@ public class TestPet {
             "202, Garfield, sold, 200",
             "203, Rabbit, unknown, 400"
     })
-    @Feature("Pet")
-    @Owner("roman tsakunov")
     public void testAddNewPet(int id, String name, String status, int expectedCode) {
         Pet pet = new Pet();
         pet.setId(id);
